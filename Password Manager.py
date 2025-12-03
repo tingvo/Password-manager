@@ -6,7 +6,7 @@ conn = sqlite3.connect('passwords.db')
 cursor = conn.cursor()
 
 root = Tk()
-root.geometry("300x200")
+root.geometry("210x110")
 root.title("Password Manager")
 
 def show():
@@ -23,19 +23,15 @@ def show():
 cursor.execute("SELECT account FROM passwords")
 accounts = cursor.fetchall()
 
-clicked = StringVar()
-
 acc_sel = ttk.Combobox(root, values = accounts)
 acc_sel.set("Select an account")
-acc_sel.pack()
+acc_sel.grid(row=0, column=0)
 
+show_button = Button(root, padx=70, text="Enter", command=show).grid(row=1, column=0, columnspan=2)
 userLabel = Label(root, text=" ")
-userLabel.pack()
+userLabel.grid(row=2, column=0)
 passLabel = Label(root, text=" ")
-userLabel.pack()
-
-show_button = Button(root, text="Enter", command=show).pack()
-
+passLabel.grid(row=3, column=0)
 
 root.mainloop()
 conn.close()
