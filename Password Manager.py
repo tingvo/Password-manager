@@ -27,7 +27,7 @@ acc_sel = ttk.Combobox(root, values = accounts)
 acc_sel.set("Select an account")
 acc_sel.grid(row=0, column=0)
 
-show_button = Button(root, padx=70, text="Enter", command=show).grid(row=1, column=0, columnspan=2)
+show_button = Button(root, padx=70, text="Enter", command=show).grid(row=1, column=0)
 userLabel = Label(root, text=" ")
 userLabel.grid(row=2, column=0)
 passLabel = Label(root, text=" ")
