@@ -5,7 +5,7 @@ conn = sqlite3.connect('passwords.db')
 cursor = conn.cursor()
 
 root = Tk()
-root.geometry("400x210")
+root.geometry("380x210")
 root.title("Password Manager")
 
 def show():
@@ -22,32 +22,38 @@ def show():
 cursor.execute("SELECT account FROM passwords")
 accounts = cursor.fetchall()
 
+## Widgets ##
 acc_sel = Listbox(root)
 for item in accounts:
     acc_sel.insert(END, item)
-acc_sel.grid(row=0, column=1, rowspan=6)
+acc_sel.grid(row=0, column=10, rowspan=7)
 
 acc_entry = Entry(root)
-acc_entry.grid(row=3, column=0)
+acc_entry.grid(row=3, column=0, columnspan=9)
 acc_entry.insert(0, "Add Website")
 
 user_entry = Entry(root)
-user_entry.grid(row=4, column=0)
+user_entry.grid(row=4, column=0, columnspan=9)
 user_entry.insert(0, "Add Username")
 
 pass_entry = Entry(root)
-pass_entry.grid(row=5, column=0)
+pass_entry.grid(row=5, column=0, columnspan=9)
 pass_entry.insert(0, "Add Password")
 
 conf_entry = Entry(root, text="Confirm Password")
-conf_entry.grid(row=6, column=0)
+conf_entry.grid(row=6, column=0, columnspan=7)
 conf_entry.insert(0, "Confirm Password")
 
 show_button = Button(root, padx=37, text="Show Details", command=show)
-show_button.grid(row=6, column=1)
-userLabel = Label(root, text="Username: ", anchor="w")
+show_button.grid(row=8, column=10)
+
+enter_button = Button(root, padx=63, text="Enter")
+enter_button.grid(row=8, column=0, columnspan=7)
+
+userLabel = Label(root, text="Username: ")
 userLabel.grid(row=0, column=0)
-passLabel = Label(root, text="Password: ", anchor="w")
+
+passLabel = Label(root, text=acc_sel.get(ACTIVE))
 passLabel.grid(row=1, column=0)
 
 root.mainloop()
