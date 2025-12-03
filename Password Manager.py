@@ -13,11 +13,11 @@ def show():
     details = cursor.fetchall()
     for x in details:
         account = x[0]
-        if account == acc_sel.get(ACTIVE):
+        if account == acc_sel.get(ACTIVE)[0]:
             username = x[1]
-            password = x[2]
-    userLabel.config(text="Username: " + username)
-    passLabel.config(text="Password: " + password)
+            password = x[2]    
+    userLabel.config(text=f"Username: {username}")
+    passLabel.config(text=f"Password: {password}")
 
 cursor.execute("SELECT account FROM passwords")
 accounts = cursor.fetchall()
@@ -53,7 +53,7 @@ enter_button.grid(row=8, column=0, columnspan=7)
 userLabel = Label(root, text="Username: ")
 userLabel.grid(row=0, column=0)
 
-passLabel = Label(root, text=acc_sel.get(ACTIVE))
+passLabel = Label(root, text="Password: ")
 passLabel.grid(row=1, column=0)
 
 root.mainloop()
