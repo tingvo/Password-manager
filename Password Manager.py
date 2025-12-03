@@ -17,8 +17,8 @@ def show():
         if account == acc_sel.get():
             username = x[1]
             password = x[2]
-    userLabel = Label(root, text="Username: " + username).pack()
-    passLabel = Label(root, text="Password: " + password).pack()
+    userLabel.config(text="Username: " + username)
+    passLabel.config(text="Password: " + password)
 
 cursor.execute("SELECT account FROM passwords")
 accounts = cursor.fetchall()
@@ -29,8 +29,13 @@ acc_sel = ttk.Combobox(root, values = accounts)
 acc_sel.set("Select an account")
 acc_sel.pack()
 
-show_button = Button(root, text="Enter", command=show()).pack()
+userLabel = Label(root, text=" ")
+userLabel.pack()
+passLabel = Label(root, text=" ")
+userLabel.pack()
 
-conn.commit()
-conn.close()
+show_button = Button(root, text="Enter", command=show).pack()
+
+
 root.mainloop()
+conn.close()
