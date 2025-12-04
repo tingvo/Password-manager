@@ -5,7 +5,7 @@ conn = sqlite3.connect('passwords.db')
 cursor = conn.cursor()
 
 root = Tk()
-root.geometry("380x210")
+root.geometry("380x230")
 root.title("Password Manager")
 
 def show():
@@ -16,8 +16,8 @@ def show():
         if account == acc_sel.get(ACTIVE)[0]:
             username = x[1]
             password = x[2]    
-    userLabel.config(text=f"Username: {username}")
-    passLabel.config(text=f"Password: {password}")
+    userLabel.config(text = username)
+    passLabel.config(text = password)
 
 cursor.execute("SELECT account FROM passwords")
 accounts = cursor.fetchall()
@@ -26,35 +26,39 @@ accounts = cursor.fetchall()
 acc_sel = Listbox(root)
 for item in accounts:
     acc_sel.insert(END, item)
-acc_sel.grid(row=0, column=10, rowspan=7)
+acc_sel.grid(row=0, column=1, rowspan=9)
+Scrollbar(acc_sel, orient="vertical")
 
 acc_entry = Entry(root)
-acc_entry.grid(row=3, column=0, columnspan=9)
+acc_entry.grid(row=4, column=0)
 acc_entry.insert(0, "Add Website")
 
 user_entry = Entry(root)
-user_entry.grid(row=4, column=0, columnspan=9)
+user_entry.grid(row=5, column=0)
 user_entry.insert(0, "Add Username")
 
 pass_entry = Entry(root)
-pass_entry.grid(row=5, column=0, columnspan=9)
+pass_entry.grid(row=6, column=0)
 pass_entry.insert(0, "Add Password")
 
 conf_entry = Entry(root, text="Confirm Password")
-conf_entry.grid(row=6, column=0, columnspan=7)
+conf_entry.grid(row=7, column=0)
 conf_entry.insert(0, "Confirm Password")
 
 show_button = Button(root, padx=37, text="Show Details", command=show)
-show_button.grid(row=8, column=10)
+show_button.grid(row=9, column=1)
 
 enter_button = Button(root, padx=63, text="Enter")
-enter_button.grid(row=8, column=0, columnspan=7)
+enter_button.grid(row=9, column=0)
 
-userLabel = Label(root, text="Username: ")
-userLabel.grid(row=0, column=0)
+userTitle = Label(root, text="Username:").grid(row=0, column=0)
+passTitle = Label(root, text="Password:").grid(row=2, column=0)
 
-passLabel = Label(root, text="Password: ")
-passLabel.grid(row=1, column=0)
+userLabel = Label(root, text=" ")
+userLabel.grid(row=1, column=0)
+
+passLabel = Label(root, text=" ")
+passLabel.grid(row=3, column=0)
 
 root.mainloop()
 conn.close()
