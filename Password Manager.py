@@ -43,11 +43,12 @@ def send_details():
     else:
         details = account, username, password
         cursor.execute("INSERT INTO passwords VALUES (?,?,?)", details)
+        conn.commit()
         set_listbox()
 
+## Widgets ##
 set_listbox()
 
-## Widgets ##
 acc_entry = Entry(root)
 acc_entry.grid(row=4, column=0)
 acc_entry.insert(0, "Add Website")
